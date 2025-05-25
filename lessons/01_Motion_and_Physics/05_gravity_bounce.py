@@ -56,11 +56,15 @@ while running:
         # Jumping means that the player is going up. The top of the 
         # screen is y=0, and the bottom is y=settings.screen_height. So, to go up,
         # we need to have a negative y velocity
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            player_y_velocity = -settings.jump_velocity
+        if keys[pygame.K_a]:
+            player_x_velocity = -settings.jump_velocity
+        if keys[pygame.K_a]:
+            player_x_velocity = -settings.jump_velocity
+            is_jumping = True 
         
-        player_y_velocity = -settings.jump_y_velocity
-        player_x_velocity = settings.jump_x_velocity * x_direction
-        
-        is_jumping = True
         
     else: # the player is jumping
         # Update player position. Gravity is always pulling the player down,
