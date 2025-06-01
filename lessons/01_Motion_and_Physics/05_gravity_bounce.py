@@ -58,12 +58,15 @@ while running:
         # we need to have a negative y velocity
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
-            player_y_velocity = -settings.jump_velocity
+            player_y_velocity = -settings.jump_x_velocity
+        if keys[pygame.K_d]:
+            player_y_velocity = -settings.jump_y_velocity
+            player_x_velocity = settings.jump_x_velocity
         if keys[pygame.K_a]:
-            player_x_velocity = -settings.jump_velocity
-        if keys[pygame.K_a]:
-            player_x_velocity = -settings.jump_velocity
-            is_jumping = True 
+            player_y_velocity = -settings.jump_y_velocity
+            player_x_velocity = -settings.jump_x_velocity
+        is_jumping = True
+        
         
         
     else: # the player is jumping

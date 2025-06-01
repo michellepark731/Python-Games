@@ -6,7 +6,7 @@ the the player constantly jumping. Notice that using gravity makes the player
 jump more realistic. The player goes up quickly, but falls slowly. 
 
 """
-import pygame
+import pygame         
 from dataclasses import dataclass
 
 # Initialize Pygame
@@ -31,6 +31,8 @@ class GameSettings:
     white: tuple = (255, 255, 255)
     black: tuple = (0, 0, 0)
     tick_rate: int = 30 # Frames per second
+K = .0004
+velocity = 0
 
 # Initialize game settings
 settings = GameSettings()
@@ -51,7 +53,7 @@ is_jumping = False
 # Main game loop
 running = True
 clock = pygame.time.Clock()
-
+a = -K * (settings.player_x - (settings.screen_width-settings.player_size) // 2)
 while running:
 
     # Handle events, such as quitting the game
@@ -68,8 +70,16 @@ while running:
         if keys[pygame.K_SPACE]:
             player_y_velocity = -settings.jump_velocity
             is_jumping = True 
+            if keys[pygame.K_a]:
+                    player_y_velocity = -settings.jump_velocity
+                    velocity += a
+                    settings.player_x += velocity
+                    
+            
+    
+   
 
-    # Update player position. Gravity is always pulling the player down,
+    # Update playerd position. Gravity is always pulling the player down,
     # which is the positive y direction, so we add GRAVITY to the y velocity
     # to make the player go up more slowly. Eventually, the player will have
     # a positive y velocity, and gravity will pull the player down.
